@@ -22,6 +22,7 @@ candidates = {
 }
 
 winner = ""
+winner_votes = 0
 
 # Read the CSV file:
 with open(election_data_csv, newline='') as csvfile:
@@ -37,24 +38,28 @@ with open(election_data_csv, newline='') as csvfile:
 
         total_votes = total_votes + 1
 
-        if (election_data_csv[2] == "Khan"):
+        if (row[2] == "Khan"):
             votes_won_Khan = votes_won_Khan + 1
             candidates.update({"Khan": votes_won_Khan})
 
-        elif (election_data_csv[2] == "Correy"):
+        elif (row[2] == "Correy"):
             votes_won_Correy = votes_won_Correy + 1
             candidates.update({"Correy": votes_won_Correy})           
 
-        elif (election_data_csv[2] == "Li"):
+        elif (row[2] == "Li"):
             votes_won_Li = votes_won_Li + 1
             candidates.update({"Li": votes_won_Li})
 
-        elif (election_data_csv[2]== "O'Tooley"):
+        elif (row[2]== "O'Tooley"):
             votes_won_OTooley = votes_won_OTooley + 1
             candidates.update({"O'Tooley": votes_won_OTooley})
 
     # Determine the winner:
-    winner = max(candidates)
+    for x in candidates:
+        votes = candidates[x]
+        if votes > winner_votes:
+            winner_votes = votes
+            winner = x
     
     # Print results:
 
@@ -63,17 +68,16 @@ with open(election_data_csv, newline='') as csvfile:
 
     print(candidates)
 
-    percent_won_Khan = votes_won_Khan / total_votes * 100
-    percent_won_Correy = votes_won_Correy / total_votes * 100
-    percent_won_Li = votes_won_Li / total_votes * 100
-    percent_won_OTooley = votes_won_OTooley / total_votes * 100    
+    percent_won_Khan = round(votes_won_Khan / total_votes * 100, 2)
+    percent_won_Correy = round(votes_won_Correy / total_votes * 100, 2)
+    percent_won_Li = round(votes_won_Li / total_votes * 100, 2)
+    percent_won_OTooley = round(votes_won_OTooley / total_votes * 100, 2)    
 
-    print("Khan: " + str(percent_won_Khan)) 
-    print("Correy: " + str(percent_won_Correy))
-    print("Li: " + str(percent_won_Li))
-    print("O'Tooley: " + str(percent_won_OTooley))
+    print("Khan: " + str(percent_won_Khan) + " %") 
+    print("Correy: " + str(percent_won_Correy) + " %")
+    print("Li: " + str(percent_won_Li) + " %")
+    print("O'Tooley: " + str(percent_won_OTooley) + " %")
 
-    print("Winner: " + winner)
     
-        
+    print("Winner: " + str(winner))
 
