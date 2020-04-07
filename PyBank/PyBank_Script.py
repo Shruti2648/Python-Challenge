@@ -26,12 +26,12 @@ with open(budget_data_csv, newline='') as csvfile:
 
         total_months = total_months + 1
 
-        totalPL = totalPL + int(budget_data_csv[1])
+        totalPL = totalPL + int(row[1])
 
-        if (budget_data_csv[1] < 0):
-            losses_array.append(int(budget_data_csv[1]))
+        if (int(row[1]) < 0):
+            losses_array.append(int(row[1]))
         else:
-            profits_array.append(int(budget_data_csv[1]))
+            profits_array.append(int(row[1]))
 
 # Calculate average change in profits/losses over the entire period:
 
@@ -46,10 +46,10 @@ with open(budget_data_csv, newline='') as csvfile:
 # Print results:
 
     print("FINANCIAL ANALYSIS")
-    print("Total Months: " + total_months)
-    print("Total Profits: $" + totalPL)
-    print("Average Change: $" + averagePL)
-    print("Greatest Increase in Profits: $" + max_profit)
-    print("Greatest Decrease in Profits: $" + max_loss)
+    print("Total Months: " + str(total_months))
+    print("Total Profits: $" + str(totalPL))
+    print("Average Change: $" + str(averagePL))
+    print("Greatest Increase in Profits: $" + str(max_profit))
+    print("Greatest Decrease in Profits: $" + str(max_loss))
 
 
